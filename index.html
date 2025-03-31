@@ -52,7 +52,7 @@
               ERROR.postMessage('');
             } else {
               var asData = event.data.split("|");
-              if (asData.length == 3) {
+              if (asData.length == 4) {
                 SUCCESS.postMessage(JSON.stringify(asData));
               } else {
                 ERROR.postMessage('');
