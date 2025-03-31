@@ -46,6 +46,7 @@
       },
       eventListeners: {
         submit: (encryptedCardData) => {
+          console.log(encryptedCardData);
           var asData = event.data.split("|");
               if (asData.length == 4) {
                 SUCCESS.postMessage(JSON.stringify(asData));
