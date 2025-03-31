@@ -46,14 +46,15 @@
       },
       eventListeners: {
         submit: (encryptedCardData) => {
-          console.log(encryptedCardData);
           if (event.data != "Close") {
             if (event.data.slice(0, 7) == "Error: ") {
               ERROR.postMessage('');
             } else {
               var asData = event.data.split("|");
-              console.log(asData);
               if (asData.length == 4) {
+                asData[0] = asData[0].replace(/\D/g, ''); 
+                asData[1] = asData[0].replace(/\D/g, ''); 
+                asData[2] = asData[0].replace(/\D/g, ''); 
                 SUCCESS.postMessage(JSON.stringify(asData));
               } else {
                 ERROR.postMessage('');
