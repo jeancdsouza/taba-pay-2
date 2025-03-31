@@ -47,12 +47,20 @@
       eventListeners: {
         submit: (encryptedCardData) => {
           console.log(encryptedCardData);
-          var asData = event.data.split("|");
+          if (event.data != "Close") {
+            if (event.data.slice(0, 7) == "Error: ") {
+              ERROR.postMessage('');
+            } else {
+              var asData = event.data.split("|");
+              console.log(asData);
               if (asData.length == 4) {
                 SUCCESS.postMessage(JSON.stringify(asData));
               } else {
                 ERROR.postMessage('');
               }
+            }
+          }
+
         },
         cancel: () => {
           EXIT.postMessage('');
@@ -65,5 +73,4 @@
     }
   </script>
 </body>
-TABAPAY 2
 </html>
