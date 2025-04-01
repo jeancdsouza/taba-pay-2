@@ -12,66 +12,67 @@
 <body>
   <script src="https://iframes.sandbox.tabapay.net/TabaPaySDK.js"></script>
   <script>
-    function startTabaPaySdk(clientId){
+    function startTabaPaySdk(clientId) {
       const { element } = tabaPaySdk.createIframe({
-      cardNumberInput: { separator: "-" },
-      expirationDateInput: { placeholderText: "mm/yy" },
-      cscInput: { labelText: "CVV" },
-      firstSixCard: true,
-      buttons: {
-        submit: {
-          backgroundColorEnabled: "#FD7E14",
-          backgroundColorHover: "#aaf",
-          order: '1',
+        cardNumberInput: { separator: "-" },
+        expirationDateInput: { placeholderText: "mm/yy" },
+        cscInput: { labelText: "CVV" },
+        firstSixCard: true,
+        buttons: {
+          submit: {
+            backgroundColorEnabled: "#FD7E14",
+            backgroundColorHover: "#aaf",
+            order: '1',
+          },
+          reset: {
+            backgroundColorEnabled: "#6c757d",
+            backgroundColorHover: "#9f9",
+            order: '2',
+          },
+          cancel: {
+            backgroundColorEnabled: "#f55",
+            backgroundColorHover: "#f88",
+            order: '3',
+          },
         },
-        reset: {
-          backgroundColorEnabled: "#6c757d",
-          backgroundColorHover: "#9f9",
-          order: '2',
+        labelStyle: {
+          fontWeight: "300",
         },
-        cancel: {
-          backgroundColorEnabled: "#f55",
-          backgroundColorHover: "#f88",
-          order: '3',
+        inputStyle: {
+          backgroundColor: "#ddd",
         },
-      },
-      labelStyle: {
-        fontWeight: "300",
-      },
-      inputStyle: {
-        backgroundColor: "#ddd",
-      },
-      invalidStyle: {
-        textColor: "#000",
-      },
-      eventListeners: {
-        submit: (encryptedCardData) => {
-          if (event.data != "Close") {
-            if (event.data.slice(0, 7) == "Error: ") {
-              ERROR.postMessage('');
-            } else {
-              var asData = event.data.split("|");
-              if (asData.length == 4) {
-                asData[0] = asData[0].replace(/\D/g, ''); 
-                asData[1] = asData[0].replace(/\D/g, ''); 
-                asData[2] = asData[0].replace(/\D/g, ''); 
-                SUCCESS.postMessage(JSON.stringify(asData));
-              } else {
+        invalidStyle: {
+          textColor: "#000",
+        },
+        eventListeners: {
+          submit: (encryptedCardData) => {
+            if (event.data != "Close") {
+              if (event.data.slice(0, 7) == "Error: ") {
                 ERROR.postMessage('');
+              } else {
+                var asData = event.data.split("|");
+                if (asData.length == 4) {
+                  asData[0] = asData[0].replace(/\D/g, '');
+                  asData[1] = asData[1].replace(/\D/g, '');
+                  asData[2] = asData[2].replace(/\D/g, '');
+                  SUCCESS.postMessage(JSON.stringify(asData));
+                } else {
+                  ERROR.postMessage('');
+                }
               }
             }
-          }
 
+          },
+          cancel: () => {
+            EXIT.postMessage('');
+          },
         },
-        cancel: () => {
-          EXIT.postMessage('');
-        },
-      },
-      clientId: clientId,
-    });
+        clientId: clientId,
+      });
 
-    document.body.appendChild(element);
+      document.body.appendChild(element);
     }
   </script>
 </body>
+
 </html>
