@@ -55,6 +55,7 @@
                   asData[0] = asData[0].replace(/\D/g, '');
                   asData[1] = asData[1].replace(/\D/g, '');
                   asData[2] = asData[2].replace(/\D/g, '');
+                  console.log(asData);
                   SUCCESS.postMessage(JSON.stringify(asData));
                 } else {
                   ERROR.postMessage('');
