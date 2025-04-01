@@ -3,9 +3,24 @@
 
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1" />
   <title>TABAPAY</title>
   <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
   </style>
 </head>
 
@@ -55,7 +70,6 @@
                   asData[0] = asData[0].replace(/\D/g, '');
                   asData[1] = asData[1].replace(/\D/g, '');
                   asData[2] = asData[2].replace(/\D/g, '');
-                  console.log(asData);
                   SUCCESS.postMessage(JSON.stringify(asData));
                 } else {
                   ERROR.postMessage('');
@@ -75,5 +89,6 @@
     }
   </script>
 </body>
+TABA PAY 2
 
 </html>
