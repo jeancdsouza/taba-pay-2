@@ -13,38 +13,21 @@
       padding: 0;
       height: 100%;
       width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
       overflow: hidden;
-      background-color: #f4f4f4;
-    }
-
-    .iframe-container {
-      width: 100%;
-      max-width: 600px;
-      /* Largura máxima */
-      display: flex;
-      justify-content: center;
-      /* Centraliza horizontalmente */
-      margin-top: 20px;
-      /* Ajuste de espaçamento no topo */
     }
 
     iframe {
       width: 100%;
-      /* Ocupa toda a largura do container */
-      height: 400px;
-      /* Altura fixa */
+      height: 100%;
       border: none;
     }
   </style>
 </head>
 
 <body>
-  <div class="iframe-container">
-    <script src="https://iframes.sandbox.tabapay.net/TabaPaySDK.js"></script>
-    <script>
+  <script src="https://iframes.sandbox.tabapay.net/TabaPaySDK.js"></script>
+  <script>
+    function startTabaPaySdk(clientId) {
       const { element } = tabaPaySdk.createIframe({
         cardNumberInput: { separator: "-" },
         expirationDateInput: { placeholderText: "mm/yy" },
@@ -109,12 +92,12 @@
             EXIT.postMessage('');
           },
         },
-        clientId: "jQoqPG8QiQvhsDEST866tg",
+        clientId: clientId,
       });
 
-      document.querySelector(".iframe-container").appendChild(element);
-    </script>
-  </div>
+      document.body.appendChild(element);
+    }
+  </script>
 </body>
 
 </html>
