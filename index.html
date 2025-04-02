@@ -13,21 +13,38 @@
       padding: 0;
       height: 100%;
       width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
       overflow: hidden;
+      background-color: #f4f4f4;
+    }
+
+    .iframe-container {
+      width: 100%;
+      max-width: 600px;
+      /* Largura máxima */
+      display: flex;
+      justify-content: center;
+      /* Centraliza horizontalmente */
+      margin-top: 20px;
+      /* Ajuste de espaçamento no topo */
     }
 
     iframe {
       width: 100%;
-      height: 100%;
+      /* Ocupa toda a largura do container */
+      height: 400px;
+      /* Altura fixa */
       border: none;
     }
   </style>
 </head>
 
 <body>
-  <script src="https://iframes.sandbox.tabapay.net/TabaPaySDK.js"></script>
-  <script>
-    function startTabaPaySdk(clientId) {
+  <div class="iframe-container">
+    <script src="https://iframes.sandbox.tabapay.net/TabaPaySDK.js"></script>
+    <script>
       const { element } = tabaPaySdk.createIframe({
         cardNumberInput: { separator: "-" },
         expirationDateInput: { placeholderText: "mm/yy" },
@@ -35,21 +52,29 @@
         firstSixCard: true,
         buttons: {
           submit: {
-            backgroundColorEnabled: "#FD7E14",
-            backgroundColorHover: "#aaf",
+            backgroundColorEnabled: "#FA6300",
+            backgroundColorHover: "#FA6300",
             textColorEnabled: '#FFFFFF',
+            textColorHover: '#FFFFFF',
             order: '3',
           },
           reset: {
+            buttonText: "Clear all",
             backgroundColorEnabled: "#FFFFFF",
             backgroundColorHover: "#FFFFFF",
             backgroundColorDisabled: "#FFFFFF",
+            textColorEnabled: '#FA6300',
+            textColorHover: '#FA6300',
             order: '1',
           },
           cancel: {
-            backgroundColorEnabled: "#f55",
-            backgroundColorHover: "#f88",
-            textColorEnabled: '#FFFFFF',
+            backgroundColorEnabled: "#FFFFFF",
+            backgroundColorHover: "#FFFFFF",
+            textColorEnabled: '#FA6300',
+            textColorHover: '#FA6300',
+            buttonBorderDisabled: '#FA6300',
+            borderColorHover: '1px solid #FA6300',
+            border: "1px solid #FA6300",
             order: '2',
           },
         },
@@ -79,18 +104,17 @@
                 }
               }
             }
-
           },
           cancel: () => {
             EXIT.postMessage('');
           },
         },
-        clientId: clientId,
+        clientId: "jQoqPG8QiQvhsDEST866tg",
       });
 
-      document.body.appendChild(element);
-    }
-  </script>
+      document.querySelector(".iframe-container").appendChild(element);
+    </script>
+  </div>
 </body>
 
 </html>
